@@ -39,8 +39,8 @@
 
 2. #### BFC优化
 
-BFC全称”Block Formatting Context”, 中文为“块级格式化上下文”。特性:
-
+BFC全称”Block Formatting Context”, 中文为“块级格式化上下文”。  
+特性:
 - 内部子元素不会影响外部元素。
 - 流体特点，水平方向自动填满容器。
 
