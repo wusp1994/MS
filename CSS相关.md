@@ -2,12 +2,12 @@
 
 1. #### 居中
 
-1.margin: 0 auto;定宽。--水平
-2.text-align: center; display:inline-block; -- 水平
-3.行高等于高度，-- 垂直
-4.绝对定位，50%减自身宽高。--垂直居中
-5.绝对定位，上下左右全0，margin:auto；--垂直居中
-6, 父级盒子(垂直居中) 不需要知道宽高
+1.margin: 0 auto;定宽。--水平  
+2.text-align: center; display:inline-block; -- 水平  
+3.行高等于高度，-- 垂直  
+4.绝对定位，50%减自身宽高。--垂直居中  
+5.绝对定位，上下左右全0，margin:auto；--垂直居中  
+6, 父级盒子(垂直居中) 不需要知道宽高  
 
 ```css
 .box{
