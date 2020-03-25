@@ -81,7 +81,7 @@
 
 6. #### 为什么要使用继承？
 
-   面向对象编程。继承的意义在于扩展，我们写东西不可能从零开始写，需要在已有东西上不断扩展功能。类似迭代版本，
+   面向对象编程。继承的意义在于扩展，对付编程最大的敌人重复代码，抽象出父类，子类实现继承扩展，类似迭代版本。
 
    平时用到的继承，比如 vue 的mixin 混合js。**可以减少重复代码，便于维护，持续迭代版本**。父类要尽量抽象，继承父级的属性和方法，可以在原有基础上扩展，还可以重写父级方法。
 
@@ -224,21 +224,21 @@
 
 10. #### 闭包
 
-    **为什么要用闭包？**  JS链式作用域的结构导致 父级变量无法访问子级变量。
-
-    **概念：**闭包是指有权访问另一个函数作用域中变量的函数。
-
-    **创建方式：**在函数创建自执行函数。
-
-    **缺点：** 常驻内存，会增大内存使用，使用不当造成内存泄漏。
-
-11. #### 事件循环述，宏任务和微任务有什么区别？
-
-    - 先主线程后异步任务队列
-
-    - 先微任务后宏任务
-
-12. #### Promise 优缺点？
+    - 为什么要用闭包？  JS链式作用域的结构导致 父级变量无法访问子级变量。
+- 概念： 内层函数能够访问外层函数作用域的变量。
+  
+- 创建方式：在函数创建自执行函数。
+  
+- 缺点：常驻内存，会增大内存使用，使用不当造成内存泄漏。
+  
+- 作用： 
+  
+    - 使用闭包修正打印值
+        - 实现柯里化。f(x,y){x+y} 变 f(x)(y)
+        - 实现 node commonJs 模块化，实现私有变量
+        - 保持变量与函数活性，可延迟回收和执行
+    
+11. #### Promise 优缺点？
 
     优点：
 
@@ -254,9 +254,40 @@
 
     3，当处于 `pending` 状态时，无法得知目前进展到哪一个阶段。
 
-13. #### 手写 Promise 实现
+12. #### 手写 Promise 实现
 
-    写源码就算了吧，写个用法吧。
+    简版封装promise
+
+    ```js
+    //模拟
+    function promise () {
+      this.msg = '' // 存放value和error
+      this.status = 'pending'
+      var that = this
+      var process = arguments[0]
+    
+      process (function () {
+        that.status = 'fulfilled'
+        that.msg = arguments[0]
+      }, function () {
+        that.status = 'rejected'
+        that.msg = arguments[0]
+      })
+      return this
+    }
+    //使用
+    promise.prototype.then = function () {
+      if (this.status === 'fulfilled') {
+        arguments[0](this.msg)
+      } else if (this.status === 'rejected' && arguments[1]) {
+        arguments[1](this.msg)
+      }
+    }
+    ```
+
+    
+
+    Promise 的用法
 
     ```js
     //创造了一个Promise实例
@@ -281,7 +312,7 @@
 
     
 
-14. #### Promise.finally实现
+13. #### Promise.finally实现
 
     由于`Promise.then(f,f)` 里面的两个函数有且只有一个被执行，不知道哪个会被执行，所以有了 `.finally()`的出现。Promise.finally 无论成败都会执行的一个函数。
 
@@ -300,7 +331,7 @@
 
     
 
-15. #### Generator了解
+14. #### Generator了解
 
     > generator是异步操作的方式之一。无法像普通函数一样调用，需要使用 generator对象的 next() 启动。
     >
@@ -347,12 +378,12 @@
 
     
 
-16. #### 观察者模式
+15. #### 观察者模式
 
     又称发布-订阅模式, 举例子说明.
     实现: 发布者管理订阅者队列, 并有新消息推送功能. 订阅者仅关注更新就行
 
-17. ####  构造函数实现原理？
+16. ####  构造函数实现原理？
 
     - `new`创建的实例，可以访问到构造函数里面的属性和方法，以及原型的属性及方法。
 
@@ -385,13 +416,94 @@
 
     
 
-18. #### 节流和防抖
+17. #### 节流和防抖
+
+    节流：一定时间内，只让函数触发的第一次生效，后面的不生效，也就是大于设定时间才能执行第二次（节流）。
+
+    举例：滚动条只输出起始位置
+
+    ```js
+    window.onload = function(){
+        docment.onscroll = throttle(function(){
+            console.log("scroll事件触发了" + Date.now())
+        },1000)
+    }
+    function throttle(fn,delay){
+        var lastTime = 0;
+        return function(){
+            var args = arguments;
+            var nowTime = Date.now();
+            if(nowTime - lastTime > delay ){
+               fn.apply(this,args)
+                lastTime = nowTime;
+            }
+        }
+    }
+    ```
+
+    防抖：一定时间内，只让函数触发的最后一次生效，前面的不生效。
+
+    举例：防止重复点击。狂点按钮，只能让最后一次触发生效。
+
+    ```ht
+    <button id='btn'>按钮</button>
+    ```
+
+    ```js
+    window.onload = function(){
+       document.getElementById('btn').onclick = debounce(function(){
+           console.log("点击了按钮"，Date.now())
+       },1000)
+    }
+    function debounce(fn,delay){
+       var timer = null;
+        return function(){
+            var that = this;
+            var args = arguments;
+            clearTimeout(timer);
+            timer = setTimeout(function(){
+                fn.apply(that,args);
+            },delay)
+        }
+    }
+    ```
 
     
 
-19. #### setTimeout 时间延迟为何不准?
+18. #### setTimeout 时间延迟为何不准?
 
     JS单线程,先执行同步主线程，再执行异步任务队列。
+
+19. #### 事件循环述，宏任务和微任务有什么区别？举例哪个先执行？
+
+    宏任务一般是：包括整体代码script，setTimeout，setInterval。
+
+    微任务：Promise，process.nextTick，都是异步任务。
+
+    1. - 先执行同步主线程，再执行异步任务队列
+
+    2. - 宏任务队列 和微任务队列都有任务的时候，先微任务后宏任务
+
+    ```js
+    console.log('同步-0-1')
+    setTimeout(function(){
+        console.log('异步-s-1')
+    });
+    new Promise((resolve,reject)=>{
+        console.log('同步-0-2')
+        resolve(2)
+    }).then(data => console.log('异步-p-1'))
+    console.log('同步-0-3');
+    //同步-0-1
+    //同步-0-2
+    //同步-0-3
+    //异步-p-1
+    //异步-s-1
+    ```
+
+    先主线程，也就是同步任务。所以先输出 同步log,`同步-0-1,同步-0-2,同步-0-3`
+
+    后异步队列,  异步队列中同时又宏任务和微任务，先微（promise）`异步-p-1`后宏(setTimeout) `异步-s-1`。
 
 20. #### 实现一个sleep函数
 
@@ -416,13 +528,91 @@
 
     
 
-21. #### js实现instanceof
+21. #### js实现instanceof ?
 
-22. #### 手写实现 bind
+    instanceof 常用来判断数据类型。
 
-23. #### http 状态码
+    缺点：不能区分 undefined和null。基本类型不是用new 声明的也不能区分。
 
-24. #### async 和 await：
+    优点：对于 new声明的类型可以检测多层继承关系。
+
+    重写后：
+
+    还是不能区分 undefined和null(单独判断)。但其他可以。
+
+    ```js
+    function myInstanceof(L, R) {//L 表示左表达式，R 表示右表达式 
+        var O = R.prototype;   // 取 R 的显示原型 
+        L = L.__proto__;  // 取 L 的隐式原型
+        while (true) {    
+            if (L === null)      
+                 return false;   
+            if (O === L)  // 当 O 显式原型 严格等于  L隐式原型 时，返回true
+                 return true;   
+            L = L.__proto__;  
+        }
+    }
+    //用法
+    console.log(myInstanceof([1,2,3],Array)) //true
+    ```
+
+    测试(扩展，可不用)
+
+    ```JS
+    var bool = true
+    var num = 1
+    var str = 'abc'
+    var und = undefined
+    var nul = null
+    var arr = [1,2,3]
+    var obj = {name:'haoxl',age:18}
+    var fun = function(){console.log('I am a function')}
+    
+    console.log(myInstanceof(arr,Array)) //true
+    console.log(myInstanceof(str,Array)) //false
+    console.log(myInstanceof(str,String)) //true
+    console.log(myInstanceof(fun,Function)) //true
+    //判断类
+    function Person(){}
+    var per = new Person()
+    console.log(myInstanceof(per,Person));// true
+    function Student(){}
+    Student.prototype = new Person()
+    var haoxl = new Student()
+    console.log(myInstanceof(haoxl,Student)) //true
+    console.log(myInstanceof(haoxl,Person)) //true
+    
+    console.log(myInstanceof(nul,Object)) //报错
+    console.log(myInstanceof(und,Object)) //报错
+    
+    ```
+
+    （扩展）提供一种，终结封装判断数据类型版本
+
+    ```js
+    var Type = (function() {
+          var type = {};
+          var typeArr = ['String', 'Object', 'Number', 'Array','Undefined', 'Function', 'Null', 'Symbol'];
+          for (var i = 0; i < typeArr.length; i++) {
+              (function(name) {
+                  type['Is' + name] = function(obj) {
+                      return Object.prototype.toString.call(obj) == '[object ' + name + ']';
+                  }
+              })(typeArr[i]);
+          }
+          return type;
+    })();
+    //用法, Is + 类型()
+    console.log(Type.IsFunction(function() {})) //true
+    console.log(Type.IsObject({})) //true
+    console.log(Type.IsUndefined(undefined)) //true
+    ```
+
+22. #### 手写实现 bind ?
+
+23. #### http 状态码 ?
+
+24. #### async 和 await ?
 
 25. #### 算法和数据结构
 
@@ -432,7 +622,18 @@
 
 28. #### 手动实现map(foreach 以及 filter 也类似)
 
-29. #### JS实现 checkbox 全选以及反选
+29. #### JS实现 checkbox 全选以及反选?
+
+    ```html
+    <body>
+        <button id="other">
+            反选
+        </button>
+        <input type="checkbox" id="all" text="全选"/>
+    </body>
+    ```
+
+    
 
 30. #### JavaScript 中 call()、apply()、bind() 的用法
 
