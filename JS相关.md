@@ -626,11 +626,49 @@
 
     ```html
     <body>
-        <button id="other">
-            反选
-        </button>
-        <input type="checkbox" id="all" text="全选"/>
+    <div>
+        <button id="other">反选</button>
+        <button id="all">全选</button>
+        <input type="checkbox" name="test" class="check" value="1"/><span>1</span>
+        <input type="checkbox" name="test" class="check" value="2"/><span>2</span>
+        <input type="checkbox" name="test" class="check" value="3"/><span>3</span>
+        <input type="checkbox" name="test" class="check" value="4"/><span>4</span>
+        <input type="checkbox" name="test" class="check" value="5"/><span>5</span>
+    </div>
+    <div>
+        <button id="getChecked">获取当前选中</button>
+        <b>输出当前选中</b>
+        <p id="showChecked"></p>
+    </div>
     </body>
+    ```
+
+    ```js
+    window.onload = function(){
+            var checkBox = document.querySelectorAll('.check');
+            //全选
+            document.querySelector('#all').onclick = function(){
+                for(let i = 0;i<checkBox.length;i++){
+                    checkBox[i].checked = true
+                }
+            }
+            //反选
+            document.querySelector('#other').onclick = function(){
+                for(let i = 0;i<checkBox.length;i++){
+                    checkBox[i].checked = !checkBox[i].checked;
+                }
+            }
+            //获取选中
+            document.querySelector('#getChecked').onclick = function(){
+                var arr = [];
+                for(let i = 0;i<checkBox.length;i++){
+                    if(checkBox[i].checked){
+                        arr.push(checkBox[i].value)
+                    }
+                }
+                document.querySelector('#showChecked').innerText = arr.join(',')
+            }
+        }
     ```
 
     
