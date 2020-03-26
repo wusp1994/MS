@@ -643,25 +643,13 @@
      test.myFun.myBind(obj, 23)()
     ```
 
-24. #### http 状态码 ?
+    
 
-    1** :   服务器收到请求
+24. #### 算法和数据结构
 
-    2**： 请求成功
+25. #### 封装JSONP
 
-    3** ： 重定向
-
-    4**： 客户端错误，语法或者资源找不到
-
-    5**： 服务端错误
-
-    304： 未改变，使用缓存
-
-25. #### 算法和数据结构
-
-26. #### 封装JSONP
-
-27. #### ajax 和axios、fetch 的区别？
+26. #### ajax 和axios、fetch 的区别？
 
     ajax:
 
@@ -677,7 +665,7 @@
 
     - 不同于ajax的进一步封装，而是原生js，没有使用 XHR 对象
 
-28. #### 手动实现map(foreach 以及 filter 也类似) 
+27. #### 手动实现map(foreach 以及 filter 也类似) 
 
     ```js
     Array.prototype.myMap = function(){
@@ -696,7 +684,7 @@
        
     ```
 
-29. #### JS实现 checkbox 全选以及反选?
+28. #### JS实现 checkbox 全选以及反选?
 
     ```html
      <body>
@@ -745,7 +733,7 @@
            }
     ```
 
-30. #### JavaScript 中 call()、apply()、bind() 的用法?
+29. #### JavaScript 中 call()、apply()、bind() 的用法?
 
     通用测试代码
 

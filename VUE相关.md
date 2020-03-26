@@ -1,0 +1,51 @@
+## VUE相关
+
+1. **MVC与MVVM**
+
+   MVC模式：model - 模型（数据保存），view - 视图（用户界面），controller-控制器（业务逻辑）。
+
+   MVVM模式：
+
+   ​	`model`-数据层。
+
+   ​	`view`-视图层。
+
+   ​	`viewModel`-连接 model和view。
+
+   区别：
+
+   - mvc是单向通信，V跟M 必须通过 C 来承上启下。mvvm 是双向通信，V和M都可以和VM进行双向通，相互调用。
+   - mvvm是 数据驱动视图，view的变动自动反应在viewModel,反过来也一样。mvc 则没有。
+
+2. **双向绑定原理？**（超高频率，最好手写一个简单定的双向绑定，面试官可能会直接问 compile,watcher,Oberve, deps 的功能和之间的联系）？
+
+   
+
+3. **vue渐进式**
+
+4. vue 生命周期？
+
+5. vue 父子组件传参方式？
+
+6. **vue自定义组件**
+
+7. **vue自定义指令**
+
+8. **vuex组成和原理**
+
+9. vue-router的实现原理，history和hash模式有什么区别？
+
+10. 虚拟 dom 为什么效率高？
+
+11. vue实现seo?
+
+12. computed 如何得知数据变化？computed 有缓存吗？
+
+13. $nextTick原理？
+
+14. v-if 和 v-show 有什么区别？
+
+15. keep-alive 是否与普通组件有一样的生命周期，如果不是，有哪些钩子？
+
+16. vue3.0和2.0双向绑定的区别，这样的改动有什么好处？
+
