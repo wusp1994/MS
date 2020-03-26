@@ -376,14 +376,19 @@
     console.log(res5) //{value: undefined, done: true}
     ```
 
-    
+15. #### async 和 await ?
 
-15. #### 观察者模式
+    - `async` 是`Generator` 函数的语法糖，将*的写法改成 `async`,将 `yield` 换成`await`。
+    - 是对 `Generator `函数的改进，返回 promise
+    - 异步写法同步化，遇到 `await`先返回，执行完异步再执行接下来的。
+    - 内置执行器，无需像 `Generator` 函数 `next()`
+
+16. #### 观察者模式
 
     又称发布-订阅模式, 举例子说明.
     实现: 发布者管理订阅者队列, 并有新消息推送功能. 订阅者仅关注更新就行
 
-16. ####  构造函数实现原理？
+17. ####  构造函数实现原理？
 
     - `new`创建的实例，可以访问到构造函数里面的属性和方法，以及原型的属性及方法。
 
@@ -416,7 +421,7 @@
 
     
 
-17. #### 节流和防抖
+18. #### 节流和防抖
 
     节流：一定时间内，只让函数触发的第一次生效，后面的不生效，也就是大于设定时间才能执行第二次（节流）。
 
@@ -470,11 +475,11 @@
 
     
 
-18. #### setTimeout 时间延迟为何不准?
+19. #### setTimeout 时间延迟为何不准?
 
     JS单线程,先执行同步主线程，再执行异步任务队列。
 
-19. #### 事件循环述，宏任务和微任务有什么区别？举例哪个先执行？
+20. #### 事件循环述，宏任务和微任务有什么区别？举例哪个先执行？
 
     宏任务一般是：包括整体代码script，setTimeout，setInterval。
 
@@ -505,7 +510,7 @@
 
     后异步队列,  异步队列中同时又宏任务和微任务，先微（promise）`异步-p-1`后宏(setTimeout) `异步-s-1`。
 
-20. #### 实现一个sleep函数
+21. #### 实现一个sleep函数
 
     利用伪死循环阻塞主线程实现。因为JS是单线程的，`setTimeout()` 的时间延迟不准确，这种方式更接近真正意义上的`sleep()`。
 
@@ -528,7 +533,7 @@
 
     
 
-21. #### js实现instanceof ?
+22. #### js实现instanceof ?
 
     instanceof 常用来判断数据类型。
 
@@ -608,11 +613,37 @@
     console.log(Type.IsUndefined(undefined)) //true
     ```
 
-22. #### 手写实现 bind ?
+23. #### 手写实现 bind ?
 
-23. #### http 状态码 ?
+    `bind()` 会返回一个新的函数，这个新函数的this会指向bind的第一个参数，bind方法的其余参数将作为新函数的参数。
 
-24. #### async 和 await ?
+    ```js
+    Function.prototype.myBind = function () {
+        if(this === Function.prototype){
+                throw new TypeError('Error')
+        }
+        var self = this;// 保存原函数
+        var context = Array.prototype.shift.call(arguments)// 取出第一个参数作为上下文,即[].shift.call(arguments)
+        // 取剩余的参数作为arg; 因为arguments是伪数组, 所以要转化为数组才能使用数组方法
+        var arg = Array.prototype.slice.call(arguments)
+        // 返回一个新函数
+        return function () {
+           // 绑定上下文并传参
+           self.apply(context, Array.prototype.concat.call(arg, Array.prototype.slice.call(arguments)))
+            }
+     }
+     var test = {
+         name: "潘子",
+         myFun: function (age) {
+             onsole.log(this.name + age)
+         }
+     }
+     var obj = {name: '小三爷'}
+     test.myFun.bind(obj, 23)()
+     test.myFun.myBind(obj, 23)()
+    ```
+
+24. #### http 状态码 ?
 
 25. #### 算法和数据结构
 
@@ -620,111 +651,128 @@
 
 27. #### ajax 和axios、fetch 的区别？
 
-28. #### 手动实现map(foreach 以及 filter 也类似)
+28. #### 手动实现map(foreach 以及 filter 也类似) 
+
+    ```js
+    Array.prototype.myMap = function(){
+               var arr = this;//获取调用原数组
+               //获取回调函数fn，arguments为一个参数数组对象
+               var [ fn, thisValue ] = Array.prototype.slice.call(arguments);
+               var result = [];
+               for(var i = 0; i < arr.length; i++){
+                   //fn.call(thisValue,arr[i],i,arr)中 (arr[i],i,arr)为回调函数参数
+                   result.push(fn.call(thisValue,arr[i],i,arr))
+               }
+               return result;
+           }
+           var arr0 = [1,2,3]
+           console.log(arr0.myMap(v => v+1))
+       
+    ```
 
 29. #### JS实现 checkbox 全选以及反选?
 
     ```html
-    <body>
-    <div>
-        <button id="other">反选</button>
-        <button id="all">全选</button>
-        <input type="checkbox" name="test" class="check" value="1"/><span>1</span>
-        <input type="checkbox" name="test" class="check" value="2"/><span>2</span>
-        <input type="checkbox" name="test" class="check" value="3"/><span>3</span>
-        <input type="checkbox" name="test" class="check" value="4"/><span>4</span>
-        <input type="checkbox" name="test" class="check" value="5"/><span>5</span>
-    </div>
-    <div>
-        <button id="getChecked">获取当前选中</button>
-        <b>输出当前选中</b>
-        <p id="showChecked"></p>
-    </div>
-    </body>
+     <body>
+       <div>
+           <button id="other">反选</button>
+           <button id="all">全选</button>
+           <input type="checkbox" name="test" class="check" value="1"/><span>1</span>
+           <input type="checkbox" name="test" class="check" value="2"/><span>2</span>
+           <input type="checkbox" name="test" class="check" value="3"/><span>3</span>
+           <input type="checkbox" name="test" class="check" value="4"/><span>4</span>
+           <input type="checkbox" name="test" class="check" value="5"/><span>5</span>
+       </div>
+       <div>
+           <button id="getChecked">获取当前选中</button>
+           <b>输出当前选中</b>
+           <p id="showChecked"></p>
+       </div>
+       </body>
     ```
 
     ```js
     window.onload = function(){
-            var checkBox = document.querySelectorAll('.check');
-            //全选
-            document.querySelector('#all').onclick = function(){
-                for(let i = 0;i<checkBox.length;i++){
-                    checkBox[i].checked = true
-                }
-            }
-            //反选
-            document.querySelector('#other').onclick = function(){
-                for(let i = 0;i<checkBox.length;i++){
-                    checkBox[i].checked = !checkBox[i].checked;
-                }
-            }
-            //获取选中
-            document.querySelector('#getChecked').onclick = function(){
-                var arr = [];
-                for(let i = 0;i<checkBox.length;i++){
-                    if(checkBox[i].checked){
-                        arr.push(checkBox[i].value)
-                    }
-                }
-                document.querySelector('#showChecked').innerText = arr.join(',')
-            }
+               var checkBox = document.querySelectorAll('.check');
+               //全选
+               document.querySelector('#all').onclick = function(){
+                   for(let i = 0;i<checkBox.length;i++){
+                       checkBox[i].checked = true
+                   }
+               }
+               //反选
+               document.querySelector('#other').onclick = function(){
+                   for(let i = 0;i<checkBox.length;i++){
+                       checkBox[i].checked = !checkBox[i].checked;
+                   }
+               }
+               //获取选中
+               document.querySelector('#getChecked').onclick = function(){
+                   var arr = [];
+                   for(let i = 0;i<checkBox.length;i++){
+                       if(checkBox[i].checked){
+                           arr.push(checkBox[i].value)
+                       }
+                   }
+                   document.querySelector('#showChecked').innerText = arr.join(',')
+               }
+           }
+    ```
+
+30. #### JavaScript 中 call()、apply()、bind() 的用法?
+
+    通用测试代码
+
+    ```js
+    var name = '小王',age = 17;
+    var obj  = {
+        name:'小张',
+        objAge : this.age,//此处this 指向全局 window
+        myFun : function(form,to){
+           console.log( this.name + "年龄" + this.age , "来自" + form + "去往" + to);//此处this 指向 obj
         }
+    }
+    console.log(obj.objAge)//17
+    obj.myFun() //小张年龄undefined 来自undefined去往undefined
+    var db = {
+        name : "德玛",
+    	age: 99
+    }
+    ```
+
+    - **call()、apply()、bind() 都是用来重定义 this 这个对象的.**
+
+    ```js
+    obj.myFun.call(db)    // 德玛年龄 99
+    obj.myFun.apply(db)   // 德玛年龄 99
+    obj.myFun.bind(db)()   // 德玛年龄 99
     ```
 
     
 
-30. #### JavaScript 中 call()、apply()、bind() 的用法
+    以上除了 bind 方法后面多了个 () 外 ，结果返回都一致！
 
-通用测试代码
+    由此得出结论，**bind 返回的是一个新的函数**，你必须调用它才会被执行。
 
-```js
-var name = '小王',age = 17;
-var obj  = {
-    name:'小张',
-    objAge : this.age,//此处this 指向全局 window
-    myFun : function(form,to){
-       console.log( this.name + "年龄" + this.age , "来自" + form + "去往" + to);//此处this 指向 obj
-    }
-}
-console.log(obj.objAge)//17
-obj.myFun() //小张年龄undefined 来自undefined去往undefined
-var db = {
-    name : "德玛",
-	age: 99
-}
-```
+    - **对比call 、bind 、 apply 传参情况下**	
 
-- **call()、apply()、bind() 都是用来重定义 this 这个对象的.**
+    ```js
+    obj.myFun.call(db,'成都','上海');   //德玛年龄99 来自成都去往上海
+    obj.myFun.apply(db,['成都','上海']);   //德玛年龄99 来自成都去往上海
+    obj.myFun.bind(db,'成都','上海')();   //德玛年龄99 来自成都去往上海
+    obj.myFun.bind(db,['成都','上海'])();   //德玛年龄99 来自成都,上海去往undefined
+    ```
 
-```js
-obj.myFun.call(db)    // 德玛年龄 99
-obj.myFun.apply(db)   // 德玛年龄 99
-obj.myFun.bind(db)()   // 德玛年龄 99
-```
+    相同点：
 
-以上除了 bind 方法后面多了个 () 外 ，结果返回都一致！
+​         call 、bind 、 apply 这三个函数的第一个参数都是 this 的指向对象，直接放进去。
 
-由此得出结论，**bind 返回的是一个新的函数**，你必须调用它才会被执行。
+​		不同点：
 
-- **对比call 、bind 、 apply 传参情况下**
+​			`call`第二第三第n个参数，用逗号隔开，直接放到后面。`obj.myFun.call(db,'成都',...,'string')`
 
-  ```js
-  obj.myFun.call(db,'成都','上海');   //德玛年龄99 来自成都去往上海
-  obj.myFun.apply(db,['成都','上海']);   //德玛年龄99 来自成都去往上海
-  obj.myFun.bind(db,'成都','上海')();   //德玛年龄99 来自成都去往上海
-  obj.myFun.bind(db,['成都','上海'])();   //德玛年龄99 来自成都,上海去往undefined
-  ```
+​			`apply` 第二第三第n个参数，必须放一个数组中传进去。`obj.myFun.call(db,['成都',...,'string'])`
 
-  相同点：
+​			`bind` 除了返回的是函数以外，参数设置和 `call` 一样。
 
-  ​         call 、bind 、 apply 这三个函数的第一个参数都是 this 的指向对象，直接放进去。
-
-  不同点：
-
-  ​			`call`第二第三第n个参数，用逗号隔开，直接放到后面。`obj.myFun.call(db,'成都',...,'string')`
-
-  ​			`apply` 第二第三第n个参数，必须放一个数组中传进去。`obj.myFun.call(db,['成都',...,'string'])`
-
-  ​			`bind` 除了返回的是函数以外，参数设置和 `call` 一样。
-
-参数不限制类型，亦可以是 函数、object等
+​		参数不限制类型，亦可以是 函数、object等
