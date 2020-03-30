@@ -17,7 +17,44 @@
    - mvc是单向通信，V跟M 必须通过 C 来承上启下。mvvm 是双向通信，V和M都可以和VM进行双向通，相互调用。
    - mvvm是 数据驱动视图，view的变动自动反应在viewModel,反过来也一样。mvc 则没有。
 
-2. **双向绑定原理？**（超高频率，最好手写一个简单定的双向绑定，面试官可能会直接问 compile,watcher,Oberve, deps 的功能和之间的联系）？
+2. **双向绑定v-model原理？**（超高频率，最好手写一个简单定的双向绑定，面试官可能会直接问 compile,watcher,Oberver, deps 的功能和之间的联系）？
+
+   ![图片描述](https://segmentfault.com/img/bVBQYu?w=730&h=390)
+
+   **数据劫持:** vue.js 则是采用 <u>数据劫持结合发布者-订阅者模式</u> 的方式，通过`Object.defineProperty()`来劫持各个属性的`setter`，`getter`，在数据变动时发布消息给订阅者（Wacther）, 触发相应的监听回调。
+
+   简化版
+
+   ```html
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <title>Title</title>
+   </head>
+   <body>
+   <div id="app">
+       <input type="text" id="txt">
+       <p id="show-txt"></p>
+   </div>
+   <script>
+       var obj={}
+       Object.defineProperty(obj,'txt',{
+           get:function(){
+               return obj
+           },
+           set:function(newValue){
+               document.getElementById('txt').value = newValue
+               document.getElementById('show-txt').innerHTML = newValue
+           }
+       })
+       document.addEventListener('keyup',function(e){
+           obj.txt = e.target.value
+       })
+   </script>
+   </body>
+   </html>
+   ```
 
    
 
