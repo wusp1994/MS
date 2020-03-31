@@ -56,11 +56,36 @@
    </html>
    ```
 
-   
+   1，Object.defineProperty(obj, prop, descriptor)
+
+   ​	  obj：需要定义属性的对象
+
+    	 prop：需要定义的属性
+
+     	descriptor：属性的描述描述符
+
+     	返回值：返回此对象
+
+   2，属性描述符（`configurable` ，`writable` ，`emumerable` ，`value` ）与访问器描述符（`	configurable` ，`emumerable`，`get` ，`set` ）。两者不能同时使用否则报错。
 
 3. **vue渐进式**
 
+   
+
 4. vue 生命周期？
+
+   | 生命周期钩子函数       | 描述                                                         |
+   | ---------------------- | ------------------------------------------------------------ |
+   | beforeCreate（创建前） | 在数据观测和初始化事件还未开始                               |
+   | created (创建后)       | 完成数据观测、属性和方法的运算、初始化事件，$el 属性还没有显示出来 |
+   | beforeMount(载入前)    | 在挂载开始前被调用，相关render函数                           |
+   | mounted(载入后)        |                                                              |
+   | beforeUpdate(更新前)   |                                                              |
+   | updated(更新后)        |                                                              |
+   | beforeDestroy(销毁前)  |                                                              |
+   | destroyed(销毁后)      |                                                              |
+
+   beforeCreate
 
 5. vue 父子组件传参方式？
 
