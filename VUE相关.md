@@ -103,19 +103,127 @@
 
 6. **vue自定义组件**
 
-   每个 .vue 文件就是一个组件，封装独立可复用的组件构成大型应用。
+   ​	每个 .vue 文件就是一个组件，封装独立可复用的组件构成大型应用。
 
 7. **vue自定义指令**
 
+   常用指令` v-for` 、` v-if` 、`v-bind` 、 `v-on` 、`v-show` 、`v-model`等
+
+   创建局部自定义指令：直接在组件中定义 directives:{ focus:{}}  
+
+   ```html
+   <!DOCTYPE html>
+   <html>
+   <head>
+       <meta charset="UTF-8">
+       <script src="../babel.min.js"></script>
+   </head>
+   <body>
+   <div id="app">
+       <input type="text" v-focus>
+   </div>
+   </body>
+   <!-- import Vue before Element -->
+   <script src="https://unpkg.com/vue/dist/vue.js"></script>
+   <script type="text/babel">
+       new Vue({
+           el: '#app',
+           data: function () {
+               return {
+   
+               }
+           },
+           directives:{
+               // 输入框自动聚焦
+               focus:{
+                   //钩子函数：被绑定元素插入父节点时调用
+                   inserted: function(el){
+                       //当被绑定的元素插入到 DOM 中时……自动获取input 焦点
+                       el.focus()
+                   }
+               },
+           },
+       })
+   </script>
+   </html>
+   ```
+
+   自定义全局指令：Vue.directive('focus',{ }）
+
+   ```html
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <title>自定义全局指令</title>
+       <script src="../babel.min.js"></script>
+   </head>
+   <body>
+   <div id="app">
+       <input type="text" v-focus>
+   </div>
+   </body>
+   <!-- import Vue before Element -->
+   <script src="https://unpkg.com/vue/dist/vue.js"></script>
+   <script type="text/babel">
+       // 注册一个全局自定义指令 `v-focus`
+       Vue.directive('focus', {
+           inserted: function (el) {
+               // 当被绑定的元素插入到 DOM 中时，聚焦元素
+               el.focus()
+           }
+       })
+       new Vue({
+           el: '#app',
+           data: function () {
+               return {
+   
+               }
+           },
+       })
+   </script>
+   </html>
+   ```
+
+   
+
+   
+
+   
+
+8. vue 自定义过滤器？
+
+9. vuex组成和原理
+
+10. vue-router的实现原理，history和hash模式有什么区别？
+
+11. 虚拟 dom 为什么效率高？
+
+12. vue实现seo?
+
+13. computed 如何得知数据变化？computed 有缓存吗？
+
+14. $nextTick原理？
+
+15. keep-alive 是否与普通组件有一样的生命周期，如果不是，有哪些钩子？
+
+16. vue3.0和2.0双向绑定的区别，这样的改动有什么好处？
 
 
-1. **vuex组成和原理**
-2. vue-router的实现原理，history和hash模式有什么区别？
-3. 虚拟 dom 为什么效率高？
-4. vue实现seo?
-5. computed 如何得知数据变化？computed 有缓存吗？
-6. $nextTick原理？
-7. v-if 和 v-show 有什么区别？
-8. keep-alive 是否与普通组件有一样的生命周期，如果不是，有哪些钩子？
-9. vue3.0和2.0双向绑定的区别，这样的改动有什么好处？
+
+## 简单一句话就能回答的
+
+1. css 只能在当前组件使用？
+2. v-if 和 v-show 区别
+3. $route 和 $router 的区别
+4. vueJS的两个核心？
+5. vue常用修饰符
+6. v-on 可以绑定多个方法？
+7. vue 中key 的作用？
+8. vue的计算属性？
+9. vue等单页面应用的优缺点？
+
+
+
+
 
