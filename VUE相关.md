@@ -279,19 +279,67 @@
 
 17. **vue3.0和2.0双向绑定的区别，这样的改动有什么好处？**
 
+    观察机制
+
+    - 3.0 版本里将有一个基于 Proxy 的观察者，提供全语言覆盖的响应式跟踪。
+
+    - 2.x 版本里基于 Object.defineProperty 的观察者
+
+    好处：
+
+    1. 组件生成快了一倍，减少一般内存的使用。
+
+    2. 新实现更加强大：可以检测属性的增加和删除、数组索引、length的变化。支持Map、set、WeakMap、WeakSet
+
 
 
 ## 简单一句话就能回答的
 
 1. css 只能在当前组件使用？
+
+   style标签增加 `scoped`，样式会自动添加一个hash值。
+
+   如果只修改当前组件的第三方组件样式使用 `/deep/`，同时 /deep/ 也会对当前组件的子组件生效。
+
+   ```html
+   <style scoped>
+    >>> 第三方组件class { 样式 }
+   或者
+   /deep/  第三方组件class { 样式 }
+   </style>
+   ```
+
 2. v-if 和 v-show 区别
-3. $route 和 $router 的区别
+
+   v-if 切换时，标签会创建和销毁。v-show 则是初始化时候就加载好了，仅仅只是css display:none的显示隐藏。
+
+3. `$route` 和 `$router` 的区别
+
+   `$route` 是vue的 **路由信息对象**，包含path、params、query、name、matched等对象属性。
+
+   `$router` 是vue的 **路由实例**，包含beforeEach、push、go、back等钩子函数。
+
 4. vueJS的两个核心？
-5. vue常用修饰符
-6. v-on 可以绑定多个方法？
-7. vue 中key 的作用？
-8. vue的计算属性？
-9. vue等单页面应用的优缺点？
+
+   数据驱动、组件系统。
+
+5. vue常用指令？
+
+   v-if、v-else、v-for、v-model、v-show、v-bind、v-on、v-slot (插槽)等
+
+6. vue常用修饰符
+
+   事件修饰符：v-on:click.stop（阻止单击事件继续传播） 、.once、.pervent(阻止默认事件)
+
+7. v-on 可以绑定多个方法？
+
+   
+
+8. vue 中key 的作用？
+
+9. vue的计算属性？
+
+10. vue等单页面应用的优缺点？
 
 
 
