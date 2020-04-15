@@ -1,21 +1,51 @@
 ## CSS相关
 
-1. #### 居中
+####  1. 块级元素与行内元素
 
-1.margin: 0 auto;定宽。--水平  
-2.text-align: center; display:inline-block; -- 水平  
-3.行高等于高度，-- 垂直  
-4.绝对定位，50%减自身宽高。--垂直居中  
-5.绝对定位，上下左右全0，margin:auto；--垂直居中  
-6, 父级盒子(垂直居中) 不需要知道宽高  
+块级元素: 默认情况下，块级元素会新起一行。[MDN地址](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Block-level_elements)
 
-```css
-.box{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}   
+- div , canvas,  h1,  h2,   p,  ul,  ol,  form,  table (常用)
+
+
+行内元素: 一个行内元素只占据它对应标签的边框所包含的空间。
+
+- `b ，i , a , span , input , button , label , code , tt , select , textarea , img , strong` 等(常用)
+
+
+
+####  2. 水平居中
+
+**行内元素** ：只需要紧邻父级 `text-align:center;`
+
+**块级元素**：块级元素会继承父级的宽度100%，所以水平居中一定要**定宽**。
+
+```html
+<!--块级元素-->
+<div class="Box" style="border: #0aa66e solid 1px;height: 200px;width: 200px;">
+    <div class="content" style="width: 100px;background-color: #0A8CD2">
+         我是块级元素，我要水平居中。或者还有垂直居中.我定宽不定高.
+    </div>
+    <span class="inlineContent" style="background-color: #0A246A;">
+          我是行内元素，我要水平居中。或者还有垂直居中.我不定宽不定高.
+    </span>
+</div>
 ```
+
+方式一：`margin: 0 auto;`
+
+方式二inline-block:  父级 ，`text-align: center;` 当前元素：`display: inline-block;`
+
+方式三flex：父级: `display:flex; justify-content:center:`
+
+方式四 绝对定位：父级：`position: relative;`当前元素：`position:absolute; top:0; left: calc(50% - 50px);`50% 减去自身宽度。
+
+#### 3. 垂直居中
+
+**行内元素：** `line-height`等于 `height`
+
+方式一：紧邻父级：`display: flex; justify-content: center; align-item: center;`
+
+ 
 
 7, 父级元素，(垂直居中)
 
