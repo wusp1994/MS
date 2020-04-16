@@ -2,15 +2,19 @@
 
 1. **MVC与MVVM**
 
-   MVC模式：model - 模型（数据保存），view - 视图（用户界面），controller-控制器（业务逻辑）。
+   MVC模式：M-model - 模型（数据保存），V-view - 视图（用户界面），C-controller-控制器（业务逻辑）。
+
+   <img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015020105.png" alt="img" style="zoom:50%;" />
+
+   1,view 传送指令到 controller  =》2. controller 完成业务逻辑后，要求model改变状态  =》3.model 将新的数据发送给view,用户得到反馈。
 
    MVVM模式：
 
-   ​	`model`-数据层。
+   ​	M-`model`-数据层。
 
-   ​	`view`-视图层。
+   ​	V-`view`-视图层。
 
-   ​	`viewModel`-连接 model和view。
+   ​	VM-`viewModel`-连接 model和view。
 
    区别：
 
