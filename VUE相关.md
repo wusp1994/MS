@@ -16,7 +16,7 @@
 
 1，各部分之间的通信，都是双向的  2，`view` 和 `model` 不发生联系，都通过 `ViewModel` 传递 3，view不做业务，为被动视图，`ViewModel` 写业务逻辑。
 
-区别：
+**区别：**
 
 - mvc是单向通信，V跟M 必须通过 C 来承上启下。mvvm 是**双向通信**，V和M都可以和VM进行双向通，相互调用。
 - mvvm是双向通信， **数据驱动视图**，`view`的变动自动反应在`viewMode`l,反过来也一样。mvc 则没有。
@@ -25,7 +25,7 @@
 
 （超高频率，最好手写一个简单定的双向绑定，面试官可能会直接问 compile,watcher,Oberver, deps 的功能和之间的联系）？
 
-![图片描述](https://segmentfault.com/img/bVBQYu?w=730&h=390)
+<img src="https://segmentfault.com/img/bVBQYu?w=730&amp;h=390" alt="图片描述" style="zoom: 80%;" />
 
 vue.js 则是采用 **<u>数据劫持结合发布者-订阅者模式</u>** 的方式，通过`Object.defineProperty()`来劫持各个属性的`setter`，`getter`，在数据变动时发布消息给订阅者（Wacther）, 触发相应的监听回调。
 
@@ -351,13 +351,13 @@ key的作用是为了更高效的更新虚拟Dom. 原理：v-for 在更新已渲
 
 ### 10，vue等单页面应用的优缺点？
 
-优点：
+**优点：**
 
 1. 内容该改变不会刷新页面，不会出现闪动和白屏。
 2. 前后端分离，前端可以分担部分业务。
 3. 路由在前端，方便视图控制。
 
-缺点：
+**缺点：**
 
 1. 不支持低版本浏览器，最低到 IE9
 2. 不利于 SEO 优化。
