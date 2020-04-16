@@ -2,24 +2,24 @@
 
 ### 1. MVC与MVVM
 
-MVC模式：M-model - 模型（数据保存），V-view - 视图（用户界面），C-controller-控制器（业务逻辑）。
+**MVC模式**：M-`model` - 模型（数据保存），V-`view` - 视图（用户界面），C-`controller`-控制器（业务逻辑）。
 
 <img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015020105.png" alt="img" style="zoom:50%;" />
 
-1,view 传送指令到 controller  =》2. controller 完成业务逻辑后，要求model改变状态  =》3.model 将新的数据发送给view,用户得到反馈。
+1,view 传送指令到 `controller`  =》2. `controller` 完成业务逻辑后，要求`model`改变状态  =》3.`model` 将新的数据发送给view,用户得到反馈。
 
-MVVM模式：
+**MVVM模式：**
 
-​	M-`model`-数据层。
+​	M-`model`-数据层。V-`view`-视图层。VM-`viewModel`-连接 model和view。
 
-​	V-`view`-视图层。
+<img src="http://www.ruanyifeng.com/blogimg/asset/2015/bg2015020110.png" alt="img" style="zoom: 50%;" />
 
-​	VM-`viewModel`-连接 model和view。
+1，各部分之间的通信，都是双向的  2，`view` 和 `model` 不发生联系，都通过 `ViewModel` 传递 3，view不做业务，为被动视图，`ViewModel` 写业务逻辑。
 
 区别：
 
 - mvc是单向通信，V跟M 必须通过 C 来承上启下。mvvm 是**双向通信**，V和M都可以和VM进行双向通，相互调用。
-- mvvm是 **数据驱动视图**，view的变动自动反应在viewModel,反过来也一样。mvc 则没有。
+- mvvm是双向通信， **数据驱动视图**，`view`的变动自动反应在`viewMode`l,反过来也一样。mvc 则没有。
 
 ### 2. 双向绑定v-model原理？
 
