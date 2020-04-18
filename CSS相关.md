@@ -1,6 +1,16 @@
-## CSS相关
+## 基础题CSS相关
 
-###  1. 块级元素与行内元素
+### 1,盒模型哪两种模式？什么区别？如何设置
+
+### 2,BFC优化
+
+BFC全称”Block Formatting Context”, 中文为“块级格式化上下文”。  
+特性:
+
+- 内部子元素不会影响外部元素。
+- 流体特点，水平方向自动填满容器。
+
+###  3, 块级元素与行内元素
 
 块级元素: 默认情况下，块级元素会新起一行。[MDN地址](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Block-level_elements)
 
@@ -11,7 +21,7 @@
 
 - `b ，i , a , span , input , button , label , code , tt , select , textarea , img , strong` 等(常用)
 
-###  2. 水平居中
+###  4, 水平居中
 
 ```HTML
 <!--块级元素-->
@@ -27,21 +37,18 @@
 </div>
 ```
 
-
-
 **行内元素** ：只需要紧邻父级 `text-align:center;`
 
 **块级元素**：
 
 - （定宽）方式一：`margin: 0 auto;`
-
+- （定宽）方式四 绝对定位：父级：`position: relative;`当前元素：`position:absolute; top:0; left: calc(50% - 50px);`50% 减去自身宽度。
 - （不定宽）方式二inline-block:  父级 ，`text-align: center;` 当前元素：`display: inline-block;`
-
 - (不定宽)方式三flex：父级: `display:flex; justify-content:center:`
 
-- （定宽）方式四 绝对定位：父级：`position: relative;`当前元素：`position:absolute; top:0; left: calc(50% - 50px);`50% 减去自身宽度。
 
-### 3. 垂直居中
+
+### 5, 垂直居中
 
 **单行行内元素：** `line-height`等于盒子 `height`"，即行高等于盒子的高"
 
@@ -49,55 +56,129 @@
 
 **块级元素：**
 
-- （不用定高）**flex**：父级：`display: flex; align-item: center;`
-
 - （定高）绝对定位 : 父级：`position: relative;`当前元素：`position:absolute; top:calc(50% - 50px); left: 0`  50% 减去自身高度。
-
-- （不用定高）transform：父级：`position: relative;`当前元素：`position:absolute; top:50%; transform: translateY(- 50%)
-
-
-
-### 4,BFC优化
-
-BFC全称”Block Formatting Context”, 中文为“块级格式化上下文”。  
-特性:
-
-- 内部子元素不会影响外部元素。
-
-- 流体特点，水平方向自动填满容器。
-
-
-### 5, css菊花图
+- （不用定高）**flex**：父级：`display: flex; align-item: center;`
+- （不用定高）transform：父级：`position: relative;`当前元素：`position:absolute; top:50%; transform: translateY(- 50%)`
 
 
 
-4. **CSS3实现环形进度条**
+### 6, css优先级/权重
 
-5. **css优先级/权重**
+ !import (无限大)  > 行内样式( 1000 ) >  id选择器 (100) >	class选择器/伪类(:hover) (10)   >  标签选择器/伪元素(::after)) (1) 
 
-6. **关于vh, vw**
+### 7,关于vh, vw
 
-7. **设置一段文字的大小为6px**
 
-8. **至少两种方式实现自适应搜索**
 
-9. **纯css实现三角形**
+### 8,常用清除浮动的方法，如不清除浮动会怎样？
 
-10. **盒模型哪两种模式？什么区别？如何设置**
+​	浮动核心就一句话：**浮动元素会脱离文档流并向左/向右浮动，直到碰到父元素或者另一个浮动元素**。请默念3次！
 
-11. **常用清除浮动的方法，如不清除浮动会怎样？**
+​	`clear` 清除浮动: 在最后一个浮动元素上使用 clear:both;
 
-12. **删格化的原理**
+### 9, 删格化的原理
 
-13. **高度不定，宽100%，内一p高不确定，如何实现垂直居中？**
+​	
 
-14. **关于em和rem**
+### 10,关于em和rem
 
-15. **Flex布局**
+### 11,Flex布局
 
-16. **overflow原理**
+### 12, overflow原理
 
-17. **实现自适应的正方形:**
+## 实践题CSS相关
+
+
+### 1, css菊花图
+
+考的是自定义 css 动画
+
+```html
+<body>
+	<div class="loader">Loading...</div>
+</body>
+```
+
+```css
+ body{ background-color: #0dc5c1 }
+
+.loader {
+    font-size: 10px;
+    margin: 50px auto;
+    text-indent: -9999em;
+    width: 11em;
+    height: 11em;
+    border-radius: 50%;
+    background: #ffffff;
+    background: -moz-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+    background: -webkit-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+    background: -o-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+    background: -ms-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+    background: linear-gradient(to right, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+    position: relative;
+    -webkit-animation: load3 1.4s infinite linear;
+    /*infinite 表示播放次数:无限*/
+    /*linear 表示播放速度:线性*/
+    animation: load3 1.4s infinite linear;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+}
+.loader:before {
+    width: 50%;
+    height: 50%;
+    background: #ffffff;
+    border-radius: 100% 0 0 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+}
+.loader:after {
+    background: #0dc5c1;
+    width: 75%;
+    height: 75%;
+    border-radius: 50%;
+    content: '';
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+@-webkit-keyframes load3 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+/*创建动画,0% 开始的时候， 100%结束的时候*/
+@keyframes load3 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+```
+
+### 2, CSS3实现环形进度条
+
+### 3, 设置一段文字的大小为6px
+
+### 4, 至少两种方式实现自适应搜索
+
+### 5, 纯css实现三角形
+
+### 6, 实现自适应的正方形:
 
 
 
