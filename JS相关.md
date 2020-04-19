@@ -704,11 +704,7 @@ Function.prototype.myBind = function () {
 
 
 
-### 算法和数据结构
-
-### 封装JSONP
-
-### ajax 和axios、fetch 的区别？
+### 25，ajax 和axios、fetch 的区别？
 
 ajax:
 
@@ -724,26 +720,26 @@ fetch:
 
 - 不同于ajax的进一步封装，而是原生js，没有使用 XHR 对象
 
-### 手动实现map(foreach 以及 filter 也类似) 
+### 26，手动实现map(foreach 以及 filter 也类似) 
 
 ```js
 Array.prototype.myMap = function(){
-           var arr = this;//获取调用原数组
-           //获取回调函数fn，arguments为一个参数数组对象
-           var [ fn, thisValue ] = Array.prototype.slice.call(arguments);
-           var result = [];
-           for(var i = 0; i < arr.length; i++){
-               //fn.call(thisValue,arr[i],i,arr)中 (arr[i],i,arr)为回调函数参数
-               result.push(fn.call(thisValue,arr[i],i,arr))
-           }
-           return result;
-       }
-       var arr0 = [1,2,3]
-       console.log(arr0.myMap(v => v+1))
+    var arr = this;//获取调用原数组
+    //获取回调函数fn，arguments为一个参数数组对象
+    var [ fn, thisValue ] = Array.prototype.slice.call(arguments);
+    var result = [];
+    for(var i = 0; i < arr.length; i++){
+        //fn.call(thisValue,arr[i],i,arr)中 (arr[i],i,arr)为回调函数参数
+        result.push(fn.call(thisValue,arr[i],i,arr))
+    }
+    return result;
+}
+var arr0 = [1,2,3]
+console.log(arr0.myMap(v => v+1))
    
 ```
 
-### JS实现 checkbox 全选以及反选?
+### 27，JS实现 checkbox 全选以及反选?
 
 ```html
  <body>
@@ -792,3 +788,8 @@ window.onload = function(){
        }
 ```
 
+
+
+### 28，算法和数据结构
+
+### 29，封装JSONP
