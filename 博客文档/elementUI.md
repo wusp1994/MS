@@ -71,3 +71,6 @@ this.$nextTick(()=>{
 
 
 
+## Select 自动匹配ID显示名称
+
+要保持 `v-model` 的数据类型与 `option`的 `value`  数据类型一致。否则无法匹配到。
