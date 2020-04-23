@@ -1,11 +1,29 @@
 ## JS相关
 
-### 1， ES5和ES6的继承方式区别？
+### ES5与ES6数据类型
+
+ES5（6种）
+
+- 基本数据类型( `undefined` 、`null` 、`boolean`、`number` 、`string` ) 
+
+- 复杂数据类型 object 包括( `狭义object` 、`数组` 、`函数`)
+
+ES6（7种）
+
+- 基本数据类型( `undefined` 、`null` 、`boolean`、`number` 、`string` ) 
+- 复杂数据类型 `object` 包括( `狭义object` 、`数组` 、`函数`)
+- `Symbol`原始数据类型Symbol，表示独一无二的值。
+
+关于 `symbol`
+
+Symbol值通过`Symbol`函数生成。对象的属性名现在可以有两种类型，一种是原来就有的字符串，另一种就是新增的Symbol类型。可以保证不会与其他属性名产生冲突。
+
+### ES5和ES6的继承方式区别？
 
 - ES5 以函数形式定义类，以prototype 来实现继承
 - ES6 以class 形式定义类，以 extend  来实现继承
 
-### 2，ES6模块引入和 CommonJS的区别？
+### ES6模块引入和 CommonJS？
 
 ES6 模块化：`import`用于引入模块; `export`模块的对外接口。
 
@@ -17,7 +35,7 @@ CommonJS 模块化： `require` 用于引入模块；`module.exports` 模块的�
 - 可重新赋值.
 - 对模块的浅拷贝 , 是缓存的值。
 
-### 3，严格模式和非严格模式的区别？
+### 严格模式和非严格区别？
 
 有很多，举一些：
 
@@ -26,7 +44,7 @@ CommonJS 模块化： `require` 用于引入模块；`module.exports` 模块的�
 - 严格模式有些对象的属性是禁止删除和新增的，进行操作会报错。（正常模式则不会报错）
 - 严格模式拥有多个同名的属性会报错。（正常模式取最后一个）
 
-### 4，let const var 对比
+### let const var 对比
 
 块 `{}` 是if for 里面的  `{}`,函数的 `{}` 不叫块。
 
@@ -36,7 +54,9 @@ let特点： 1，无法重复声明。 2，变量可修改。 3，有块级作�
 
 const特点： 1，无法重复声明。 2，常量，不可修改。 3，有块级作用域。
 
-### 5，对原型链的理解？ `prototype` 上有哪些属性？
+> 注意：const 的不能更改指的是**引用地址不可变**。当是基本数据类型的时候，更改会报错，引用数据类型的时候则可以更改。好比：对象为什么要深克隆，而不能直接 `=`  复制对象。深克隆的时候有一种转换JSON字符串就是**引用地址的使用**。
+
+### 对原型链的理解？ `prototype` 上有哪些属性？
 
 原型链:
 
@@ -79,13 +99,13 @@ F.prototype = {
 
 
 
-### 6，为什么要使用继承？
+### 为什么要使用继承？
 
 面向对象编程。继承的意义在于扩展，对付编程最大的敌人重复代码，抽象出父类，子类实现继承扩展，类似迭代版本。
 
 平时用到的继承，比如 vue 的mixin 混合js。**可以减少重复代码，便于维护，持续迭代版本**。父类要尽量抽象，继承父级的属性和方法，可以在原有基础上扩展，还可以重写父级方法。
 
-### 7，JavaScript 中 call()、apply()、bind() 的用法?
+### JavaScript 中 call()、apply()、bind() 的用法?
 
 通用测试代码
 
@@ -143,7 +163,7 @@ obj.myFun.bind(db,['成都','上海'])();   //德玛年龄99 来自成都,上海
 
 ​		参数不限制类型，亦可以是 函数、object等
 
-### 8，手写实现4种继承
+### 手写实现4种继承
 
 **原型链继承**：
 
@@ -266,7 +286,7 @@ console.log(stu) //{name: "小王", age: 23, number: "2009001"}
 
 
 
-### 9，for in 和 for of、forEach区别?
+### for in 和 for of、forEach区别?
 
 `for in` 适合遍历对象，因为遍历数组的话会遍历数组原型上的属性和方法。
 
@@ -276,13 +296,13 @@ console.log(stu) //{name: "小王", age: 23, number: "2009001"}
 
 `for in ` 可以遍历到对象的原型的方法和属性,可在循环中判断过滤掉。（hasOwnPropery方法可判断属性思否是该对象的实例属性）
 
-### 10，JS实现并发控制
+### JS实现并发控制
 
 使用消息队列以及`setInterval`或`promise`进行入队和出队
 
-### 11，闭包
+### 闭包
 
-- 为什么要用闭包？  JS链式作用域的结构导致 父级变量无法访问子级变量。
+- 产生原因：  JS链式作用域的结构导致 父级变量无法访问子级变量。
 
 - 概念： 内层函数能够访问外层函数作用域的变量。
   
@@ -297,7 +317,10 @@ console.log(stu) //{name: "小王", age: 23, number: "2009001"}
         - 实现 node commonJs 模块化，实现私有变量
         - 保持变量与函数活性，可延迟回收和执行
     
-### 12，Promise 优缺点？
+
+
+
+### Promise 优缺点？
 
 优点：
 
@@ -313,7 +336,7 @@ console.log(stu) //{name: "小王", age: 23, number: "2009001"}
 
 3，当处于 `pending` 状态时，无法得知目前进展到哪一个阶段。
 
-### 13，手写 Promise 实现
+### 手写 Promise 实现
 
 简版封装promise
 
@@ -371,7 +394,7 @@ myPromise().then(res=>{
 
 
 
-### 14，Promise.finally实现
+### Promise.finally实现
 
 由于`Promise.then(f,f)` 里面的两个函数有且只有一个被执行，不知道哪个会被执行，所以有了 `.finally()`的出现。Promise.finally 无论成败都会执行的一个函数。
 
@@ -390,7 +413,7 @@ Promise.prototype.finally = (callback)=>{
 
 
 
-### 15，Generator了解
+### Generator了解
 
 > generator是异步操作的方式之一。无法像普通函数一样调用，需要使用 generator对象的 next() 启动。
 >
@@ -435,19 +458,19 @@ console.log(res4) //{value: "yield4", done: false}
 console.log(res5) //{value: undefined, done: true}
 ```
 
-### 16，async 和 await ?
+### async 和 await ?
 
 - `async` 是`Generator` 函数的语法糖，将*的写法改成 `async`,将 `yield` 换成`await`。
 - 是对 `Generator `函数的改进，返回 promise
 - 异步写法同步化，遇到 `await`先返回，执行完异步再执行接下来的。
 - 内置执行器，无需像 `Generator` 函数 `next()`
 
-### 17，观察者模式
+### 观察者模式
 
 又称发布-订阅模式, 举例子说明.
 实现: 发布者管理订阅者队列, 并有新消息推送功能. 订阅者仅关注更新就行
 
-###  18，构造函数实现原理？
+###  构造函数实现原理？
 
 - `new`创建的实例，可以访问到构造函数里面的属性和方法，以及原型的属性及方法。
 
@@ -480,7 +503,7 @@ function create() {
 
 
 
-### 19，节流和防抖
+### 节流和防抖
 
 节流：一定时间内，只让函数触发的第一次生效，后面的不生效，也就是大于设定时间才能执行第二次（节流）。
 
@@ -534,11 +557,11 @@ function debounce(fn,delay){
 
 
 
-### 20，setTimeout 时间延迟为何不准?
+### setTimeout 时间延迟为何不准?
 
 JS单线程,先执行同步主线程，再执行异步任务队列。
 
-### 21，事件循环述，宏任务和微任务有什么区别？举例哪个先执行？
+### 事件循环述，宏任务和微任务有什么区别？举例哪个先执行？
 
 宏任务一般是：包括整体代码script，setTimeout，setInterval。
 
@@ -569,7 +592,7 @@ console.log('同步-0-3');
 
 后异步队列,  异步队列中同时又宏任务和微任务，先微（promise）`异步-p-1`后宏(setTimeout) `异步-s-1`。
 
-### 22，实现一个sleep函数
+### 实现一个sleep函数
 
 利用伪死循环阻塞主线程实现。因为JS是单线程的，`setTimeout()` 的时间延迟不准确，这种方式更接近真正意义上的`sleep()`。
 
@@ -592,7 +615,7 @@ test()
 
 
 
-### 23，js实现instanceof ?
+### js实现instanceof ?
 
 instanceof 常用来判断数据类型。
 
@@ -672,7 +695,7 @@ console.log(Type.IsObject({})) //true
 console.log(Type.IsUndefined(undefined)) //true
 ```
 
-### 24，手写实现 bind ?
+### 手写实现 bind ?
 
 `bind()` 会返回一个新的函数，这个新函数的this会指向bind的第一个参数，bind方法的其余参数将作为新函数的参数。
 
@@ -704,7 +727,7 @@ Function.prototype.myBind = function () {
 
 
 
-### 25，ajax 和axios、fetch 的区别？
+### ajax 和axios、fetch 的区别？
 
 ajax:
 
@@ -720,7 +743,7 @@ fetch:
 
 - 不同于ajax的进一步封装，而是原生js，没有使用 XHR 对象
 
-### 26，手动实现map(foreach 以及 filter 也类似) 
+### 手动实现map(foreach 以及 filter 也类似) 
 
 ```js
 Array.prototype.myMap = function(){
@@ -739,7 +762,7 @@ console.log(arr0.myMap(v => v+1))
    
 ```
 
-### 27，JS实现 checkbox 全选以及反选?
+### JS实现 checkbox 全选以及反选?
 
 ```html
  <body>
@@ -790,11 +813,11 @@ window.onload = function(){
 
 
 
-### 28，算法和数据结构
+### 算法和数据结构
 
-### 29，封装JSONP
+### 封装JSONP
 
-### 30，编程范式
+### 编程范式
 
 **命令式编程** 
 
