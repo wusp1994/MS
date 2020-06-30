@@ -23,3 +23,77 @@ let routeData = this.$router.resolve({
 window.open(routeData.href, '_blank');
 ```
 
+
+
+## vue中使用节流和防抖
+
+```js
+//tool.js
+/**
+ * @desc 函数防抖
+ * @param func 函数
+ * @param wait 延迟执行毫秒数
+ * @param immediate true 表立即执行，false 表非立即执行
+ */
+export function debounce (func, wait, immediate = true) {
+  let timeout
+  return function () {
+    if (timeout) clearTimeout(timeout)
+    if (immediate) {
+      var callNow = !timeout
+      timeout = setTimeout(() => {
+        timeout = null
+      }, wait)
+      if (callNow) func.apply(this, arguments)
+    } else {
+      timeout = setTimeout(function () {
+        func.apply(context, args)
+      }, wait)
+    }
+  }
+}
+```
+
+#### 方式一:import到每个组件单独使用
+
+```js
+import { debounce } from '@/utils/tool'//引入函数
+export default {
+    methods: {
+        debounceClickTest: debounce(function () {
+            this.clickTest()
+        }, 1000),
+            clickTest () {
+            console.log(this.form.uname, this.form.upwd)
+        }
+    }
+}
+```
+
+:::warning: 其回调函数不能使用箭头函数,否则拿不到 `this`,因为箭头函数绑定this,导致this为undefined.
+
+```html
+ <button @click="debounceClickTest">登陆</button>
+```
+
+#### 方式二:封装成vue函数组件,(不推荐)
+
+#### 方式三:封装成指令(推荐)
+
+```js
+//directive.js
+import Vue from 'vue'
+import { debounce } from '@/utils/tool'
+// 防抖自定义指令
+Vue.directive('debounce', {
+  bind (el, binding) {
+    const executeFunction = debounce(binding.value, 1000)
+    el.addEventListener('click', executeFunction)
+  }
+})
+```
+
+```html
+  <button v-debounce="login">登陆</button>
+```
+
