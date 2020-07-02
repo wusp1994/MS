@@ -74,3 +74,7 @@ this.$nextTick(()=>{
 ## Select 自动匹配ID显示名称
 
 要保持 `v-model` 的数据类型与 `option`的 `value`  数据类型一致。否则无法匹配到。
+
+## tooltip 
+
+tooltip 内不支持 disabled form 元素，参考[MDN](https://developer.mozilla.org/en-US/docs/Web/Events/mouseenter)，请在 disabled form 元素外层添加一层包裹元素。
