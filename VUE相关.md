@@ -27,7 +27,7 @@
 
 <img src="https://segmentfault.com/img/bVBQYu?w=730&amp;h=390" alt="图片描述" style="zoom: 80%;" />
 
-vue.js 则是采用 **<u>数据劫持结合发布者-订阅者模式</u>** 的方式，通过`Object.defineProperty()`来劫持各个属性的`setter`，`getter`，在数据变动时发布消息给订阅者（Wacther）, 触发相应的监听回调。
+vue.js 则是采用 **<u>数据劫持结合发布者-订阅者模式</u>** 的方式，通过`Object.defineProperty()`来劫持各个属性的`setter`，`getter`，在数据变动时发布消息给订阅者（Wacther）, 触发相应的监听回调。（文本节点则是作为订阅者）
 
 举例：当把一个 js 对象传给 Vue 实例来作为data 时， Vue 将遍历它的属性，用 Object.defineProperty() 处理一遍，在get 和set 的时候监控访问和修改。
 
@@ -279,7 +279,7 @@ vue更新DOM是异步的，数据变更时不会立即重新渲染，而是被�
 
 > 在 2.2.0 及其更高版本中，`activated` 和 `deactivated` 将会在 `keep-alive` 树内的所有嵌套组件中触发。
 
-### 15，vue3.0和2.0双向绑定的区别，这样的改动有什么好处？
+### 15，vue3.0和2.0双向绑定的区别以及好处？
 
 观察机制
 
