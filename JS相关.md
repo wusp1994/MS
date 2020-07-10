@@ -817,6 +817,20 @@ window.onload = function(){
 
 ### 封装JSONP
 
+### 找出字符串中连续出现的字符
+
+```
+//找出字符串中连续出现的字符
+var str= 'aaasfjkjkbbbdjkjssjccc'
+// (\w) 匹配除了换行和制表符的字符，
+// \l 对(\w)的一个引用，表示联系相同的字符，
+// * 表示任意相同的字符，g 全局匹配
+var arr = str.match(/(\w)\1*/g).filter(item=> item.length > 1);
+var arr1 = str.match(/(.)\1+/g);
+console.log(arr)
+console.log(arr1)
+```
+
 ### 编程范式
 
 **命令式编程** 

@@ -255,7 +255,7 @@ seo,是便于搜索引擎爬取。 传统页面在 meta 标签加入关键词。
 
 ，只在相关响应式依赖发生改变时它们才会重新求值。”不希望使用缓存，就去使用` methods:{}`
 
-### 14，$nextTick原理？
+### 14，$nextTick原理？（更新dom）
 
 `Vue.nextTick(callback)` 作用：针对在数据更新完成后，等待**dom更新后执行**的问题。比如调用elementUI对话框的ref 时。
 
