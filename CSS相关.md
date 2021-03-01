@@ -2,6 +2,24 @@
 
 ### 1,盒模型哪两种模式？什么区别？如何设置
 
+- **W3C 盒子模型(标准盒模型)**
+
+  ​	box-sizing: content-box（元素默认）
+
+  ​	标签得实际宽度 = 设置的宽度 + border宽度 + padding的宽度
+
+  ![img](D:\WuWorkSpace\md文档中心\MS\front-end-interview\1318790-20190412104311814-1887067143.png)
+
+- **IE 盒子模型(怪异盒模型)**
+
+  ​	box-sizing: border-box
+
+  ​	标签得实际宽度 = 设置的宽度 
+
+  ​	如果设置了padding和border就是从设置的实际宽高中减去，减去后才是内容的宽高。
+
+  ![img](D:\WuWorkSpace\md文档中心\MS\front-end-interview\1318790-20190412104422455-475712220.png)
+
 ### 2,BFC优化
 
 BFC全称”Block Formatting Context”, 中文为“块级格式化上下文”。  

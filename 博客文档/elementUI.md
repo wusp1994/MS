@@ -42,6 +42,13 @@ password(rule, value, callback) {
 	if (/*条件*/) return callback(new Error('错误提示'))
 	callback()
 }
+
+rules: {
+    password: [
+        { required: true, message: '请输入密码', trigger: 'blur' },
+        { validator: password, trigger: 'blur' }
+    ],
+}
 ```
 
 

@@ -4,6 +4,8 @@
 
  JavaScript 中，通常 window 是全局对象， 而 Node.js 中的全局对象是 global，所有全局变量（除了 global 本身以外）都是 global 对象的属性。
 
+在javascript中，通过var a = 100；是可以通过window.a来得到100的但在nodejs中，是不能通过global.a来访问，得到的是undefined,因为只是模块范围内的变量a，而不是global对象下的a。
+
 **常用的全局变量**：
 
 **__filename**  :表示当前正在执行的脚本的文件名。它将输出文件所在位置的绝对路径，且和命令行参数所指定的文件名不一定相同。 如果在模块中，返回的值是模块文件的路径。
@@ -66,6 +68,8 @@ $ node main.js
 `CommonJS规范`---是通过module.exports定义的，在前端浏览器里面并不支持module.exports,通过node.js后端使用的。Nodejs端是使用CommonJS规范的，前端浏览器一般使用AMD、CMD、ES6等定义模块化开发的。
 
 `ES6特性，模块化`---export/import对模块进行导出导入的。
+
+`Node模块化`在实现中并非完全按照CommonJS规范实现，而是对模块规范进行了一定的取舍，同时也增加了少许自身需要的特性。
 
 
 

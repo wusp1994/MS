@@ -1,3 +1,5 @@
+
+
 ## VUE相关
 
 ### 1. MVC与MVVM
@@ -68,15 +70,85 @@ vue.js 则是采用 **<u>数据劫持结合发布者-订阅者模式</u>** 的�
 
 1，Object.defineProperty(obj, prop, descriptor)
 
-​	  obj：需要定义属性的对象
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
 
- 	 prop：需要定义的属性
+ 	obj：需要定义属性的对象
+ 	prop：需要定义的属性
+ 	descriptor：属性的描述描述符
+ 	
+ 	返回值：返回此对象
 
-  	descriptor：属性的描述描述符
+2，对象里目前存在的属性描述符有两种主要形式：*数据描述符*（`writable` ，`emumerable` ，`value`）和*存取描述符*（`get` ，`set`）。*数据描述符*是一个具有值的属性，该值可以是可写的，也可以是不可写的。*存取描述符*是由 getter 函数和 setter 函数所描述的属性。一个描述符只能是这两者其中之一；不能同时是两者否则报错。
 
-  	返回值：返回此对象
+属性描述符默认是这些。
 
-2，属性描述符（`configurable` ，`writable` ，`emumerable` ，`value` ）与访问器描述符（`	configurable` ，`emumerable`，`get` ，`set` ）。两者不能同时使用否则报错。
+**configurable**：**默认为** **`false`**。
+
+**enumerable** 默认为 `false`。
+
+**value** **默认为 [`undefined`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined)**。
+
+**writable** **默认为 `false`。**
+
+**get** **默认为 [`undefined`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined)**。
+
+**set** **默认为 [`undefined`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined)**。
+
+#### 尝试说明defineProperty以下结果以及原因：
+
+```js
+const person = { name: "yd"}
+Object.defineProperty(person,"age",{value: 21})
+person.age = 18
+console.log(person) // {name: "yd", age: 21 }
+console.log(Object.keys(person)) // ["name"]
+```
+
+答：普通的对象创建时候，属性描述符默认是这些。
+
+**configurable**：**默认为** **`false`**。
+
+**enumerable** 默认为 `false`。
+
+**value** **默认为 [`undefined`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined)**。
+
+**writable** **默认为 `false`。**
+
+**get** **默认为 [`undefined`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined)**。
+
+**set** **默认为 [`undefined`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined)**。
+
+const的底层默认的不知道哪些?
+
+从value结果看，const 的属性描述符是:
+
+**configurable**：**默认为** **`true`**。
+
+**enumerable** 默认为 `false`。
+
+**value** **默认为 [`undefined`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined)**。
+
+**writable** **默认为 `false`。**
+
+**get** **默认为 [`undefined`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined)**。
+
+**set** **默认为 [`undefined`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/undefined)**。
+
+Object.keys(person)  方法会返回一个由一个给定对象的自身`可枚举属性`组成的数组，数组中属性名的排列顺序和正常循环遍历该对象时返回的顺序一致 。所以 只返回了创建时的key `name` 
+
+只要在进行defineProperty()的时候改变它的属性描述符，就能改变const本来的默认，让const不再是const 。
+
+比如我加了configurable: true,writable:true ,enumerable:true。值就能输出出来了
+
+```js
+const person = { name: "yd"}
+Object.defineProperty(person,"age",{value: 21,configurable: true,writable:true,enumerable:true})
+person.age = 18
+console.log(person)  //VM516:4 {name: "yd", age: 18}
+console.log(Object.keys(person)) // ["name", "age"]
+```
+
+
 
 ### 3. 生命周期vue？
 
